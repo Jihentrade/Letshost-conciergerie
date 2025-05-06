@@ -61,7 +61,7 @@ function Navbar() {
     navigate("/notreContact");
   };
   const handleDevis = () => {
-    navigate("/contactezNous");
+    navigate("/obtenirUneEstimation");
   };
   return (
     <AppBar
@@ -87,7 +87,7 @@ function Navbar() {
               flex: 1,
             }}
           >
-            <img src={logo} alt="Logo" style={{ width: "120px" }} />
+            <img src={logo} alt="Logo" style={{ width: "85px" }} />
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>

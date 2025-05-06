@@ -14,6 +14,7 @@ import emailjs from "emailjs-com";
 const EstimationPage = () => {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({
+    addressMail: "",
     type: "",
     typeRes: "",
     rooms: "",
@@ -79,7 +80,7 @@ const EstimationPage = () => {
                 fullWidth
                 label="Votre adresse mail"
                 name="addressMail"
-                value={form.address}
+                value={form.addressMail}
                 onChange={handleChange}
                 margin="normal"
                 required

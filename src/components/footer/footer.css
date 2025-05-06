@@ -2,7 +2,7 @@
   padding: 4rem 4rem;
 }
 .footer {
-  background-color: #265073;
+  background-color: #000000;
   width: 100%;
 }
 .sb__footer {
@@ -58,6 +58,9 @@ a {
 .sb__footer-below-links {
   display: flex;
   flex-direction: row;
+}
+.footer-logo {
+  width: 15%;
 }
 .sb__footer-below-links p {
   font-size: 13px;

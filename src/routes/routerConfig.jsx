@@ -2,7 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Estimation from "../pages/Estimation";
-// import Letshost from "../pages/Letshost";
+import Accueil from "../pages/Accueil";
 // import Login from "../pages/Login";
 // import Dashboard from "../pages/Dashboard";
 // import NotFound from "../pages/NotFound";
@@ -24,7 +24,8 @@ export default function RouterConfig() {
           }
         />
         <Route path="*" element={<NotFound />} /> */}
-        <Route path="/" element={<Estimation />}></Route>
+        <Route path="/obtenirUneEstimation" element={<Estimation />}></Route>
+        <Route path="/" element={<Accueil />} />
       </Routes>
     </Router>
   );
