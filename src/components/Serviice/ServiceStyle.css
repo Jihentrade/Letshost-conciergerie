@@ -1,0 +1,104 @@
+.box {
+  padding: 16px;
+  text-align: center;
+  color: #333;
+}
+.container {
+  /* width: 103.5%; */
+  max-width: 100%;
+  margin: 0 auto;
+  /* padding: 0 16px; */
+  padding: 0;
+}
+.coloredBox1 {
+  padding: 16px;
+  text-align: center;
+  background-color: #b5c0d0;
+}
+.coloredBox2 {
+  padding: 16px;
+  text-align: center;
+  background-color: #ccd3ca;
+}
+.coloredBox3 {
+  padding: 16px;
+  text-align: center;
+  background-color: #f5e8dd;
+}
+.coloredBox4 {
+  padding: 16px;
+  text-align: center;
+  background-color: #eed3d9;
+}
+
+
+
+
+
+
+
+.confiez-section {
+  background-color: #f9f9f9;
+  padding: 60px 20px;
+}
+
+.confiez-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.confiez-title {
+  font-size: 2.5rem;
+  color: #102a43;
+  margin-bottom: 20px;
+}
+
+.confiez-description {
+  font-size: 1rem;
+  color: #334e68;
+  margin-bottom: 40px;
+}
+
+.confiez-steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.confiez-step {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.confiez-step-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.confiez-step-title {
+  font-size: 1.25rem;
+  color: #102a43;
+  margin-bottom: 10px;
+}
+
+.confiez-step-description {
+  font-size: 1rem;
+  color: #334e68;
+  margin-bottom: 15px;
+}
+
+.confiez-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #2f80ed;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+}

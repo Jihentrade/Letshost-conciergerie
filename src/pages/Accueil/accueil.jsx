@@ -1,11 +1,14 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
-import coverImage from "../../../src/assets/couverture.png";
+import coverImage from "../../../src/assets/airbnb_logo.gif";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Footer from "../../components/footer";
 import "./styleAccueil.css";
-import ServicesPersonnalises from "../../components/Service"; 
+import ServicesPersonnalises from "../../components/Servicee";
+import QuiSommeNous from "../../components/quiSommeNous";
+import FAQSection from "../../components/faqSection";
+import Service from "../../components/Serviice";
 const theme = createTheme();
 
 const Accueil = () => {
@@ -29,7 +32,7 @@ const Accueil = () => {
           style={{
             objectFit: "cover",
             width: "100%",
-            maxHeight: "600px",
+            maxHeight: "550px",
           }}
         />
 
@@ -40,11 +43,22 @@ const Accueil = () => {
               Nous gérons votre location saisonnière Airbnb
             </p>
             <p className="conciergerie-description">
-              Propriétaire d’un bien à Nice ? Confiez la gestion de votre location saisonnière à notre service de conciergerie. Nous prenons en charge l’ensemble du processus : création et optimisation de votre annonce sur des plateformes telles qu’Airbnb, Booking.com, Abritel et Hotels.com, accueil des voyageurs, ménage professionnel, maintenance, et gestion des réservations. Notre objectif est de maximiser vos revenus tout en vous libérant des contraintes quotidiennes. Profitez d’un service clé en main, sans engagement, pour une tranquillité d’esprit totale.
+              Propriétaire d’un bien à Nice ? Confiez la gestion de votre
+              location saisonnière à notre service de conciergerie. Nous prenons
+              en charge l’ensemble du processus : création et optimisation de
+              votre annonce sur des plateformes telles qu’Airbnb, Booking.com,
+              Abritel et Hotels.com, accueil des voyageurs, ménage
+              professionnel, maintenance, et gestion des réservations. Notre
+              objectif est de maximiser vos revenus tout en vous libérant des
+              contraintes quotidiennes. Profitez d’un service clé en main, sans
+              engagement, pour une tranquillité d’esprit totale.
             </p>
           </div>
         </section>
         <ServicesPersonnalises />
+        <QuiSommeNous />
+        <FAQSection />
+        <Service />
       </Box>
       <Footer />
     </ThemeProvider>

@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import logo from "../../../src/assets/logo.png";
 import { useNavigate } from "react-router-dom";
+import Aproposdenous from "../../pages/AproposDeNous/aproposdenous";
 
 // import { useSelector } from "react-redux";
 
@@ -46,8 +47,8 @@ function Navbar() {
   };
 
   // Rediriger vers la page "À propos de nous"
-  const handleOpenRestaurant = () => {
-    navigate("/Àproposdenous");
+  const handleOpenProposdenous = () => {
+    navigate("/Aproposdenous");
   };
   // Rediriger vers la page "Nos Services"
   const handleOpenPatisserie = () => {
@@ -58,7 +59,7 @@ function Navbar() {
     navigate("/");
   };
   const handleContact = () => {
-    navigate("/notreContact");
+    navigate("/contact");
   };
   const handleDevis = () => {
     navigate("/obtenirUneEstimation");
@@ -123,7 +124,7 @@ function Navbar() {
                   Accueil
                 </Typography>
               </MenuItem>
-              <MenuItem onClick={handleOpenRestaurant}>
+              <MenuItem onClick={handleOpenProposdenous}>
                 <Typography textAlign="center" sx={{ color: "#176B87" }}>
                   À propos de nous
                 </Typography>
@@ -186,7 +187,7 @@ function Navbar() {
               aria-controls={open ? "basic-menu" : undefined}
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
-              onClick={handleOpenRestaurant}
+              onClick={handleOpenProposdenous}
               sx={{ color: "#176B87" }}
             >
               À propos de nous
@@ -196,7 +197,7 @@ function Navbar() {
               anchorEl={anchorEl}
               open={open}
               onClose={handleClose}
-              onClick={handleOpenRestaurant}
+              onClick={handleOpenProposdenous}
               MenuListProps={{
                 "aria-labelledby": "basic-button",
               }}
