@@ -9,6 +9,7 @@ import ServicesPersonnalises from "../../components/Servicee";
 import QuiSommeNous from "../../components/quiSommeNous";
 import FAQSection from "../../components/faqSection";
 import Service from "../../components/Serviice";
+import LogoServ from "../../components/leslogo";
 const theme = createTheme();
 
 const Accueil = () => {
@@ -60,6 +61,7 @@ const Accueil = () => {
         <FAQSection />
         <Service />
       </Box>
+      <LogoServ />
       <Footer />
     </ThemeProvider>
   );

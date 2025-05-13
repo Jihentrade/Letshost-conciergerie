@@ -50,10 +50,7 @@ function Navbar() {
   const handleOpenProposdenous = () => {
     navigate("/Aproposdenous");
   };
-  // Rediriger vers la page "Nos Services"
-  const handleOpenPatisserie = () => {
-    navigate("/Nos Services");
-  };
+
   // Rediriger vers la page "Accueil"
   const handleOpenAccueil = () => {
     navigate("/");
@@ -129,11 +126,7 @@ function Navbar() {
                   À propos de nous
                 </Typography>
               </MenuItem>
-              <MenuItem onClick={handleOpenPatisserie}>
-                <Typography textAlign="center" sx={{ color: "#176B87" }}>
-                  Nos Services
-                </Typography>
-              </MenuItem>
+             
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center" sx={{ color: "#176B87" }}>
                   Contact
@@ -204,17 +197,7 @@ function Navbar() {
             ></Menu>
             {/*  Creation la bouton patisserie  */}
 
-            <Button
-              onClick={handleOpenPatisserie}
-              sx={{
-                my: 2,
-                color: "#176B87",
-                display: "block",
-                justifyContent: "center",
-              }}
-            >
-              Nos Services
-            </Button>
+           
 
             <Button
               onClick={handleContact}

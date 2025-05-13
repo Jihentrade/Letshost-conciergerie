@@ -3,7 +3,7 @@ import React from 'react';
 import './contactPage.css'; 
 
 const FloatingWhatsAppButton = () => {
-  const phoneNumber = '21699616660'; 
+  const phoneNumber = '336 05 60 53 37'; 
   const message = encodeURIComponent("Bonjour, je souhaite obtenir plus d'informations");
 
   return (

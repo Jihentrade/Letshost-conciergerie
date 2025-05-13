@@ -99,7 +99,12 @@ const ConfiezLocation = () => {
             <p className="confiez-step-description">
               Prenez rendez-vous avec un professionnel.
             </p>
-            <a href="#contact" className="confiez-button">
+            <a
+              href="https://api.whatsapp.com/send/?phone=+330605605337&text=Bonjour%2C+je+souhaite+obtenir+plus+d%27informations"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="confiez-button"
+            >
               Réserver un RDV
             </a>
           </div>

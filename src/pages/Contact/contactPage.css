@@ -1,63 +1,94 @@
-/* ContactPage.css */
-
-.contact-page {
-  max-width: 600px;
-  margin: 0 auto;
+.contact-container {
   padding: 2rem;
-  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
 }
 
-.contact-page h1 {
+.contact-boxes {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.contact-box {
+  background-color: white;
+  padding: 1rem;
   text-align: center;
-  color: #333;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 0.5rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+.contact-icon {
+  font-size: 2rem;
+  color: #4a90e2;
+  filter: drop-shadow(1px 1px 0px #00000044);
+  stroke: #333;
+}
+
+.contact-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .contact-form {
-  display: flex;
-  flex-direction: column;
+  flex: 1;
+  min-width: 300px;
 }
 
-.contact-form label {
-  margin-top: 1rem;
-  color: #555;
+.contact-form h2 {
+  margin-bottom: 1rem;
 }
 
 .contact-form input,
 .contact-form textarea {
+  width: 100%;
   padding: 0.8rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1em;
-  margin-top: 0.5rem;
 }
 
-.contact-form button {
-  margin-top: 1.5rem;
-  padding: 1em;
+.contact-form textarea {
+  height: 120px;
+}
+
+.whatsapp-button {
   background-color: #25d366;
   color: white;
   border: none;
-  border-radius: 5px;
-  font-size: 1.1em;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.contact-form button:hover {
-  background-color: #1ebe5d;
+.contact-image {
+  flex: 1;
+  min-width: 300px;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
 }
 
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 100;
-  background-color: #25d366;
-  border-radius: 50%;
-  padding: 10px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+.contact-image img {
+  width: 52%;
+  /* height: auto; */
+  border-radius: 12px;
+  object-fit: cover;
 }
 
-.whatsapp-icon {
-  width: 40px;
-  height: 40px;
+@media (max-width: 768px) {
+  .contact-content {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 }

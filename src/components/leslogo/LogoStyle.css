@@ -1,0 +1,44 @@
+.box {
+  padding: 16px;
+  text-align: center;
+  color: #333;
+}
+.container {
+  /* width: 103.5%; */
+  max-width: 100%;
+  margin: 0 auto;
+  /* padding: 0 16px; */
+  padding: 0;
+  height: 100%;
+}
+.coloredBox1 {
+  padding: 16px;
+  text-align: center;
+  background-color: #b5c0d0;
+  height: 100%;
+}
+.coloredBox2 {
+  padding: 16px;
+  text-align: center;
+  height: 100%;
+  background-color: #ccd3ca;
+}
+.coloredBox3 {
+  padding: 16px;
+  text-align: center;
+  background-color: #f5e8dd;
+  height: 100%;
+}
+.coloredBox4 {
+  padding: 16px;
+  text-align: center;
+  background-color: #eed3d9;
+  height: 100%;
+}
+.logo-icon {
+  width: 255px;
+  height: 210px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
