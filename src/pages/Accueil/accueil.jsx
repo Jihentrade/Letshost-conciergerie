@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
-import coverImage from "../../../src/assets/airbnb_logo.gif";
+import coverImage from "../../../src/assets/conciergerie-nice-couverture.jpg";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Footer from "../../components/footer";
@@ -10,6 +10,8 @@ import QuiSommeNous from "../../components/quiSommeNous";
 import FAQSection from "../../components/faqSection";
 import Service from "../../components/Serviice";
 import LogoServ from "../../components/leslogo";
+import { Helmet } from "react-helmet";
+
 const theme = createTheme();
 
 const Accueil = () => {
@@ -38,6 +40,22 @@ const Accueil = () => {
         />
 
         <section className="conciergerie-section">
+          <Helmet>
+            <title>
+              Conciergerie Airbnb à Nice - Gestion de locations saisonnières
+            </title>
+            <meta
+              name="description"
+              content="Confiez votre bien à notre conciergerie Airbnb à Nice. Optimisation, accueil, ménage, gestion totale sans engagement. Maximisez vos revenus !"
+            />
+            <meta
+              name="keywords"
+              content="conciergerie Airbnb Nice, gestion location saisonnière, services Airbnb Nice, location courte durée Nice"
+            />
+            <meta name="robots" content="index, follow" />
+            <link rel="canonical" href="https://votre-site.com/" />
+          </Helmet>
+
           <div className="conciergerie-container">
             <h2 className="conciergerie-title">Conciergerie à Nice</h2>
             <p className="conciergerie-subtitle">

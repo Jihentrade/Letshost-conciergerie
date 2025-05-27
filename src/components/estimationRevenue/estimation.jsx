@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
+import Swal from "sweetalert2";
 
 const EstimationPage = () => {
   const [step, setStep] = useState(1);
@@ -26,40 +27,117 @@ const EstimationPage = () => {
   };
 
   const handleNext = () => {
-    if (step < 4) setStep(step + 1);
+    if (step < 5) setStep(step + 1);
   };
 
   const handleBack = () => {
     if (step > 1) setStep(step - 1);
   };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const templateParams = {
+  //     addressMail: form.addressMail,
+  //     type: form.type,
+  //     typeRes: form.typeRes,
+  //     rooms: form.rooms,
+  //     address: form.address,
+  //   };
+
+  //   emailjs
+  //     .send(
+  //       "service_0p51h9d",
+  //       "template_12dbgds",
+  //       templateParams,
+  //       "zC_-yk_KfML4WY-pT"
+  //     )
+  //     .then(() => {
+  //       Swal.fire({
+  //         icon: "success",
+  //         title: "Email envoyé !",
+  //         text: "Votre estimation a bien été envoyée. Nous vous contacterons bientôt.",
+  //         confirmButtonText: "OK",
+  //       });
+  //       setForm({
+  //         addressMail: "",
+  //         type: "",
+  //         typeRes: "",
+  //         rooms: "",
+  //         address: "",
+  //       });
+  //       setStep(1);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Erreur d'envoi :", error);
+  //       Swal.fire({
+  //         icon: "error",
+  //         title: "Erreur",
+  //         text: "Une erreur s'est produite lors de l'envoi de l'email.",
+  //         confirmButtonText: "Réessayer",
+  //       });
+  //     });
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Vérification des champs requis
+    if (
+      !form.addressMail.trim() ||
+      !form.type ||
+      !form.typeRes ||
+      !form.rooms ||
+      !form.address.trim()
+    ) {
+      Swal.fire({
+        icon: "warning",
+        title: "Champs manquants",
+        text: "Veuillez remplir tous les champs avant de soumettre.",
+        confirmButtonText: "OK",
+      });
+      return;
+    }
+
     const templateParams = {
+      addressMail: form.addressMail,
       type: form.type,
       typeRes: form.typeRes,
       rooms: form.rooms,
       address: form.address,
-      addressMail: form.addressMail,
     };
 
     emailjs
       .send(
-        "service_2544f3s",
-        "template_gqp3lsp",
+        "service_9jv2w64",
+        "template_qhmuaoj",
         templateParams,
         "zC_-yk_KfML4WY-pT"
       )
-
-      .then(
-        () => {
-          alert(` Email envoyé avec succès !`);
-        },
-        (err) => {
-          console.error("Erreur d'envoi :", err);
-          alert("Erreur lors de l'envoi de l'email.");
-        }
-      );
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Email envoyé !",
+          text: "Votre estimation a bien été envoyée. Nous vous contacterons bientôt.",
+          confirmButtonText: "OK",
+        });
+        setForm({
+          addressMail: "",
+          type: "",
+          typeRes: "",
+          rooms: "",
+          address: "",
+        });
+        setStep(1);
+      })
+      .catch((error) => {
+        console.error("Erreur d'envoi :", error);
+        Swal.fire({
+          icon: "error",
+          title: "Erreur",
+          text: "Une erreur s'est produite lors de l'envoi de l'email.",
+          confirmButtonText: "Réessayer",
+        });
+      });
   };
 
   return (
@@ -151,7 +229,7 @@ const EstimationPage = () => {
                   Retour
                 </Button>
               )}
-              {step < 4 ? (
+              {step < 5 ? (
                 <Button variant="contained" onClick={handleNext}>
                   Suivant
                 </Button>
