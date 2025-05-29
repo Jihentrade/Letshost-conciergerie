@@ -3,6 +3,14 @@
   margin-top: 40px;
   margin-left: 80px;
 }
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
 .product-page {
   display: flex;
@@ -253,7 +261,7 @@ body {
 /* {--------------paragraphe condiergerie--------------------} */
 .conciergerie-section {
   background-color: #ffffff;
-  padding: 1px 20px;
+  padding: 1px 1px;
   width: 100%;
   display: flex;
   justify-content: center;

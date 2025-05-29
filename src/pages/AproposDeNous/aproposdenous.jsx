@@ -9,27 +9,28 @@ const Aproposdenous = () => {
     <>
       <Navbar />
       <main className="min-h-screen bg-gray-50 py-8 flex justify-center items-center">
-      <div className="w-full max-w-md px-4">
-      <Box
-        sx={{
-          position: "relative",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          backgroundColor: "white",
-        }}
-      >
-        <img
-          src={Carte}
-          alt="Couverture"
-          style={{
-            objectFit: "cover",
-            width: "100%",
-            maxHeight: "700px",
-          }}
-        />
+        <div className="w-full max-w-md px-4">
+          <Box
+            sx={{
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              textAlign: "center",
+              backgroundColor: "white",
+            }}
+          >
+            <img
+              src={Carte}
+              alt="Couverture"
+              style={{
+                objectFit: "cover",
+                width: "100%",
+                maxHeight: "700px",
+                display: "block",
+              }}
+            />
           </Box>
         </div>
       </main>

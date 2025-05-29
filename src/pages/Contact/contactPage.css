@@ -9,7 +9,10 @@
   margin-bottom: 2rem;
   flex-wrap: wrap;
 }
-
+.carousel-section{
+  display: "block";
+  object-fit: cover;
+}
 .contact-box {
   background-color: white;
   padding: 1rem;
