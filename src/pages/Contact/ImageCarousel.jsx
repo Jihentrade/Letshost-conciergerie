@@ -34,12 +34,11 @@ const ImageCarousel = () => {
         />
       </AnimatePresence>
       <div className="carousel-text">
-        <h2>Vous avez des questions ?</h2>
+        <h3>Des questions sur nos services ?</h3>
         <p>
-          Vous souhaitez en savoir plus sur nos services ou réserver un séjour ?
-          <br />
-          Nous sommes à votre disposition pour répondre à toutes vos demandes et
-          vous accompagner dans vos projets de location courte durée.
+          Envie d’en savoir plus ou de réserver votre séjour ?<br />
+          Nous vous accompagnons dans tous vos projets de location courte durée
+          à Nice.
         </p>
       </div>
     </div>
