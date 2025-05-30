@@ -260,11 +260,13 @@ body {
 }
 /* {--------------paragraphe condiergerie--------------------} */
 .conciergerie-section {
-  background-color: #ffffff;
-  padding: 1px 1px;
+  background-color: #fdfdfd;
+  padding: 0;
   width: 100%;
   display: flex;
   justify-content: center;
+  position: relative;
+  /* height: 100vh;  */
 }
 
 .conciergerie-container {
