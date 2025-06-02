@@ -16,7 +16,9 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import Swal from "sweetalert2";
 import emailjs from "emailjs-com";
-
+import { Helmet } from "react-helmet";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+const theme = createTheme();
 const steps = [
   "Adresse mail",
   "Type d'hébergement",
@@ -25,7 +27,6 @@ const steps = [
   "Adresse du bien",
 ];
 
-// Composant compteur générique
 function Counter({ label, value, onChange, min = 0 }) {
   return (
     <Box
@@ -38,30 +39,15 @@ function Counter({ label, value, onChange, min = 0 }) {
     >
       <Box>
         <Typography variant="subtitle1">{label}</Typography>
-        <Typography variant="caption" color="text.secondary">
-          {value} {label.toLowerCase()}
-        </Typography>
       </Box>
       <Box>
-        <IconButton
-          aria-label={`Réduire ${label}`}
-          onClick={() => onChange(-1)}
-          disabled={value <= min}
-          size="large"
-        >
+        <IconButton onClick={() => onChange(-1)} disabled={value <= min}>
           <RemoveIcon />
         </IconButton>
-        <Typography
-          component="span"
-          sx={{ mx: 2, fontWeight: "bold", fontSize: "1.25rem" }}
-        >
+        <Typography component="span" sx={{ mx: 2, fontWeight: "bold" }}>
           {value}
         </Typography>
-        <IconButton
-          aria-label={`Augmenter ${label}`}
-          onClick={() => onChange(1)}
-          size="large"
-        >
+        <IconButton onClick={() => onChange(1)}>
           <AddIcon />
         </IconButton>
       </Box>
@@ -71,7 +57,6 @@ function Counter({ label, value, onChange, min = 0 }) {
 
 export default function EstimationPage() {
   const [activeStep, setActiveStep] = useState(0);
-
   const [form, setForm] = useState({
     addressMail: "",
     type: "",
@@ -85,13 +70,9 @@ export default function EstimationPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Gestion des compteurs multiples
   const handleCounterChange = (field, delta) => {
     setForm((prev) => {
       const newValue = prev[field] + delta;
@@ -99,7 +80,6 @@ export default function EstimationPage() {
     });
   };
 
-  // Validation par étape
   const validateStep = () => {
     switch (activeStep) {
       case 0:
@@ -112,27 +92,22 @@ export default function EstimationPage() {
         )
           return "Adresse mail invalide.";
         return null;
-
       case 1:
         if (!form.type) return "Veuillez sélectionner un type d'hébergement.";
         return null;
-
       case 2:
         if (!form.typeRes) return "Veuillez sélectionner un type de résidence.";
         return null;
-
       case 3:
-        if (form.voyageurs <= 0)
-          return "Veuillez indiquer le nombre de voyageurs.";
-        if (form.lits <= 0) return "Veuillez indiquer le nombre de lits.";
-        if (form.sallesDeBain <= 0)
-          return "Veuillez indiquer le nombre de salles de bain.";
+        if (form.voyageurs <= 0) return "Nombre de voyageurs invalide.";
+        if (form.lits <= 0) return "Nombre de lits invalide.";
+        if (form.chambres < 0)
+          return "Veuillez indiquer le nombre de chambres.";
+        if (form.sallesDeBain <= 0) return "Nombre de salles de bain invalide.";
         return null;
-
       case 4:
         if (!form.address.trim()) return "Veuillez entrer l'adresse du bien.";
         return null;
-
       default:
         return null;
     }
@@ -143,64 +118,54 @@ export default function EstimationPage() {
     if (error) {
       Swal.fire({
         icon: "warning",
-        title: "Erreur de validation",
+        title: "Erreur",
         text: error,
-        confirmButtonText: "OK",
       });
       return;
     }
-    if (activeStep < steps.length - 1) setActiveStep((prev) => prev + 1);
+    setActiveStep((prev) => prev + 1);
   };
 
   const handleBack = () => {
-    if (activeStep > 0) setActiveStep((prev) => prev - 1);
+    setActiveStep((prev) => prev - 1);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validation finale
-    if (
-      !form.addressMail.trim() ||
-      !form.type ||
-      !form.typeRes ||
-      form.voyageurs <= 0 ||
-      form.lits <= 0 ||
-      form.sallesDeBain <= 0 ||
-      !form.address.trim()
-    ) {
-      Swal.fire({
-        icon: "warning",
-        title: "Champs manquants",
-        text: "Veuillez remplir tous les champs avant de soumettre.",
-        confirmButtonText: "OK",
-      });
-      return;
-    }
-
-    const templateParams = {
-      addressMail: form.addressMail,
-      type: form.type,
-      typeRes: form.typeRes,
-      voyageurs: form.voyageurs.toString(),
-      chambres: form.chambres.toString(),
-      lits: form.lits.toString(),
-      sallesDeBain: form.sallesDeBain.toString(),
-      address: form.address,
-    };
+    const message = `
+📩 Email : ${form.addressMail}  
+🏠 Type : ${form.type}  
+🔑 Sous-type : ${form.typeRes}  
+👥 Voyageurs : ${form.voyageurs}  
+🛏 Chambres : ${form.chambres}  
+🛋️ Lits : ${form.lits}  
+🛁 Salles de bain : ${form.sallesDeBain}  
+📍 Adresse : ${form.address}
+`;
 
     emailjs
       .send(
         "service_9jv2w64",
         "template_qhmuaoj",
-        templateParams,
+        {
+          addressMail: form.addressMail,
+          type: form.type,
+          typeRes: form.typeRes,
+          voyageurs: form.voyageurs,
+          chambres: form.chambres,
+          lits: form.lits,
+          sallesDeBain: form.sallesDeBain,
+          address: form.address,
+          message,
+        },
         "zC_-yk_KfML4WY-pT"
       )
       .then(() => {
         Swal.fire({
           icon: "success",
-          title: "Email envoyé !",
-          text: "Votre estimation a bien été envoyée. Nous vous contacterons bientôt.",
-          confirmButtonText: "OK",
+          title: "Estimation envoyée",
+          text: "Nous vous contacterons bientôt.",
         });
         setForm({
           addressMail: "",
@@ -210,163 +175,171 @@ export default function EstimationPage() {
           chambres: 0,
           lits: 1,
           sallesDeBain: 1,
-
           address: "",
         });
         setActiveStep(0);
       })
-      .catch((error) => {
-        console.error("Erreur d'envoi :", error);
+      .catch(() => {
         Swal.fire({
           icon: "error",
           title: "Erreur",
-          text: "Une erreur s'est produite lors de l'envoi de l'email.",
-          confirmButtonText: "Réessayer",
+          text: "L'envoi a échoué. Veuillez réessayer.",
         });
       });
   };
+
   return (
-    <Box maxWidth="600px" mx="auto" p={2}>
-      <Typography variant="h4" align="center" gutterBottom>
-        Estimez vos revenus Airbnb
-      </Typography>
-
-      <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-
-      <Card sx={{ mt: 3 }}>
-        <CardContent>
-          <form onSubmit={handleSubmit} noValidate>
-            {/* Étape 1 - Email */}
-            {activeStep === 0 && (
-              <TextField
-                fullWidth
-                label="Votre adresse mail"
-                name="addressMail"
-                type="email"
-                value={form.addressMail}
-                onChange={handleChange}
-                margin="normal"
-                required
-              />
-            )}
-
-            {/* Étape 2 - Type d'hébergement */}
-            {activeStep === 1 && (
-              <TextField
-                select
-                fullWidth
-                label="Type d'hébergement"
-                name="type"
-                value={form.type}
-                onChange={handleChange}
-                margin="normal"
-                required
-              >
-                <MenuItem value="">Sélectionner</MenuItem>
-                <MenuItem value="Appartement">Appartement</MenuItem>
-                <MenuItem value="Maison">Maison</MenuItem>
-                <MenuItem value="Villa">Villa</MenuItem>
-                <MenuItem value="Studio">Studio</MenuItem>
-                <MenuItem value="Chambre privée">Chambre privée</MenuItem>
-              </TextField>
-            )}
-
-            {/* Étape 3 - Type de résidence */}
-            {activeStep === 2 && (
-              <TextField
-                select
-                fullWidth
-                label="Type de résidence"
-                name="typeRes"
-                value={form.typeRes}
-                onChange={handleChange}
-                margin="normal"
-                required
-              >
-                <MenuItem value="">Sélectionner</MenuItem>
-                <MenuItem value="principale">Résidence principale</MenuItem>
-                <MenuItem value="secondaire">Résidence secondaire</MenuItem>
-              </TextField>
-            )}
-
-            {/* Étape 4 - Détails du logement (voyageurs, chambres, lits, salles de bain) */}
-            {activeStep === 3 && (
-              <Box mt={2}>
-                <Counter
-                  label="Voyageurs"
-                  value={form.voyageurs}
-                  onChange={(delta) => handleCounterChange("voyageurs", delta)}
-                  min={1}
+    <ThemeProvider theme={theme}>
+      <Box
+        sx={{
+          width: "100%",
+          maxWidth: "600px",
+          mx: "auto",
+          px: 2,
+          py: 4,
+          // display: "flex",
+          // flexDirection: "column",
+          // justifyContent: "center",
+          minHeight: "100%",
+        }}
+      >
+        {" "}
+        <Helmet>
+          <title>Estimation Airbnb | Conciergerie Nice</title>
+          <meta
+            name="description"
+            content="Estimez vos revenus Airbnb avec notre formulaire interactif. Rapide, simple, gratuit et sans engagement."
+          />
+          <meta name="robots" content="index, follow" />
+        </Helmet>
+        <Typography variant="h4" align="center" gutterBottom>
+          Estimez vos revenus Airbnb
+        </Typography>
+        <Stepper activeStep={activeStep} alternativeLabel>
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+        <Card sx={{ mt: 3 }}>
+          <CardContent>
+            <form onSubmit={handleSubmit}>
+              {activeStep === 0 && (
+                <TextField
+                  fullWidth
+                  label="Adresse mail"
+                  name="addressMail"
+                  value={form.addressMail}
+                  onChange={handleChange}
+                  margin="normal"
+                  required
                 />
-                <Counter
-                  label="Chambres"
-                  value={form.chambres}
-                  onChange={(delta) => handleCounterChange("chambres", delta)}
-                  min={0}
+              )}
+
+              {activeStep === 1 && (
+                <TextField
+                  select
+                  fullWidth
+                  label="Type d'hébergement"
+                  name="type"
+                  value={form.type}
+                  onChange={handleChange}
+                  margin="normal"
+                  required
+                >
+                  <MenuItem value="">Sélectionner</MenuItem>
+                  <MenuItem value="Appartement">Appartement</MenuItem>
+                  <MenuItem value="Maison">Maison</MenuItem>
+                  <MenuItem value="Villa">Villa</MenuItem>
+                  <MenuItem value="Studio">Studio</MenuItem>
+                  <MenuItem value="Chambre privée">Chambre privée</MenuItem>
+                </TextField>
+              )}
+
+              {activeStep === 2 && (
+                <TextField
+                  select
+                  fullWidth
+                  label="Type de résidence"
+                  name="typeRes"
+                  value={form.typeRes}
+                  onChange={handleChange}
+                  margin="normal"
+                  required
+                >
+                  <MenuItem value="">Sélectionner</MenuItem>
+                  <MenuItem value="principale">Principale</MenuItem>
+                  <MenuItem value="secondaire">Secondaire</MenuItem>
+                </TextField>
+              )}
+
+              {activeStep === 3 && (
+                <Box mt={2}>
+                  <Counter
+                    label="Voyageurs"
+                    value={form.voyageurs}
+                    onChange={(delta) =>
+                      handleCounterChange("voyageurs", delta)
+                    }
+                    min={1}
+                  />
+                  <Counter
+                    label="Chambres"
+                    value={form.chambres}
+                    onChange={(delta) => handleCounterChange("chambres", delta)}
+                    min={0}
+                  />
+                  <Counter
+                    label="Lits"
+                    value={form.lits}
+                    onChange={(delta) => handleCounterChange("lits", delta)}
+                    min={1}
+                  />
+                  <Counter
+                    label="Salles de bain"
+                    value={form.sallesDeBain}
+                    onChange={(delta) =>
+                      handleCounterChange("sallesDeBain", delta)
+                    }
+                    min={1}
+                  />
+                </Box>
+              )}
+
+              {activeStep === 4 && (
+                <TextField
+                  fullWidth
+                  label="Adresse du bien"
+                  name="address"
+                  value={form.address}
+                  onChange={handleChange}
+                  margin="normal"
+                  required
                 />
-                <Counter
-                  label="Lits"
-                  value={form.lits}
-                  onChange={(delta) => handleCounterChange("lits", delta)}
-                  min={1}
-                />
-                <Counter
-                  label="Salles de bain"
-                  value={form.sallesDeBain}
-                  onChange={(delta) =>
-                    handleCounterChange("sallesDeBain", delta)
-                  }
-                  min={1}
-                />
+              )}
+
+              <Box mt={3} display="flex" justifyContent="space-between">
+                {activeStep > 0 && (
+                  <Button onClick={handleBack} variant="outlined">
+                    Retour
+                  </Button>
+                )}
+                {activeStep < steps.length - 1 ? (
+                  <Button onClick={handleNext} variant="contained">
+                    Suivant
+                  </Button>
+                ) : (
+                  <Button type="submit" variant="contained">
+                    Envoyer l’estimation
+                  </Button>
+                )}
               </Box>
-            )}
-
-            {/* Étape 5 - Adresse */}
-            {activeStep === 4 && (
-              <TextField
-                fullWidth
-                label="Adresse du bien"
-                name="address"
-                value={form.address}
-                onChange={handleChange}
-                margin="normal"
-                required
-              />
-            )}
-
-            {/* Navigation */}
-            <Box
-              mt={3}
-              display="flex"
-              justifyContent="space-between"
-              flexWrap="wrap"
-              gap={1}
-            >
-              {activeStep > 0 && (
-                <Button variant="outlined" onClick={handleBack}>
-                  Retour
-                </Button>
-              )}
-              {activeStep < steps.length - 1 ? (
-                <Button variant="contained" onClick={handleNext}>
-                  Suivant
-                </Button>
-              ) : (
-                <Button variant="contained" type="submit">
-                  Estimer
-                </Button>
-              )}
-            </Box>
-          </form>
-        </CardContent>
-      </Card>
-    </Box>
+            </form>
+          </CardContent>
+        </Card>
+      </Box>
+    </ThemeProvider>
   );
 }
 
